@@ -18,9 +18,11 @@ module.exports = function(app) {
     };
 
     $scope.createNewMovie = function() {
-      $scope.movies.push($scope.newMovie);  // how does this resolve default values
+      $scope.movies.push($scope.newMovie);
       $http.post('/api/movies', $scope.newMovie)
-        .success(function(data) {           // how this this data get populated. res is not used
+        .success(function(data) {
+          $scope.movies.pop();
+          $scope.movies.push(data);           // how this this data get populated. res is not used
           $scope.newMovie = null;
         })
         .error(function(data) {
@@ -46,10 +48,6 @@ module.exports = function(app) {
           console.log(data);
           $scope.errors.push({msg:'could not edit movie' + movie.name});
         });
-    };
-
-    $scope.oldMovie = function(movie) {
-      alert(movie);
     };
 
     $scope.clearErrors = function() {
