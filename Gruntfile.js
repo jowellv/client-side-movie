@@ -18,9 +18,7 @@ module.exports = function(grunt) {
         stats: {
           colors: true,
           reasons: true
-        },
-        watch: true,
-        keepalive: true
+        }
       },
       test: {
         entry: __dirname + '/test/client/test.js',
@@ -50,7 +48,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build:dev', ['webpack:client', 'copy:html']);
-  grunt.registerTask('build:test', ['webpack:test']);
+  // grunt.registerTask('build:test', ['webpack:test']);
   grunt.registerTask('build', ['build:dev']);
   grunt.registerTask('default', ['build']);
 
