@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jowellv/rest-api-mongo",
   "dependencies": {
+    "angular": "^1.4.0",
     "body-parser": "^1.12.3",
     "express": "^4.12.3",
     "mongoose": "^4.0.2"

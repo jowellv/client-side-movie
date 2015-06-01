@@ -27,7 +27,7 @@ module.exports = function(router) {
         console.log(err);
         return res.status(500).json('internal server brain fart');
       }
-      res.json(newMovie);
+      res.json({msg:'大成功！'});
     });
   });
 
