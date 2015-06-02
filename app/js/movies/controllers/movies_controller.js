@@ -22,7 +22,7 @@ module.exports = function(app) {
       $http.post('/api/movies', $scope.newMovie)
         .success(function(data) {
           $scope.movies.pop();
-          $scope.movies.push(data);           // how this this data get populated. res is not used
+          $scope.movies.push(data);
           $scope.newMovie = null;
         })
         .error(function(data) {
@@ -37,7 +37,7 @@ module.exports = function(app) {
       $http.delete('/api/movies/' + movie._id)
         .error(function(data) {
           console.log(data);
-          $scope.errors.push({msg:'could not remove movie' + movie.name});
+          $scope.errors.push({msg:'could not remove movie ' + movie.name});
         });
     };
 
@@ -46,7 +46,7 @@ module.exports = function(app) {
       $http.put('/api/movies/' + movie._id, movie)
         .error(function(data) {
           console.log(data);
-          $scope.errors.push({msg:'could not edit movie' + movie.name});
+          $scope.errors.push({msg:'could not edit movie ' + movie.name});
         });
     };
 
