@@ -1,0 +1,21 @@
+{
+  "curly": false,
+  "eqeqeq": true,
+  "undef": true,
+  "node": true,
+  "globals": {
+    "expect": true,
+    "document": true,
+    "describe": true, 
+    "it": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "jQuery": true,
+    "require": true,
+    "console": true,
+    "module": true,
+    "__dirname": true
+  }
+}
