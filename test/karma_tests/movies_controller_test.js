@@ -36,6 +36,7 @@ describe('movie controller' ,function() {
       // this fails the test if any methods were not
      // flushed to the $http API
       $httpBackend.verifyNoOutstandingRequest();
+      $httpBackend.resetExpectations();
     });
     it('should make a get request on index', function() {
       // expect - will fail if not performed, see afterEach below
@@ -58,13 +59,13 @@ describe('movie controller' ,function() {
     });
 
     it('should be able to save a new movie', function() {
-      $scope.newMovie = {name: 'test movie', genre: 'comedy'};
+      var newMovie = {name: 'test movie', genre: 'comedy'};
       $httpBackend.expectPOST('/api/movies').respond(200, {_id: '2', name: 'test movie'});
-      $scope.createNewMovie();
+      $scope.createNewMovie(newMovie);
       $httpBackend.flush();
-      expect($scope.movies[0].name).toBe('test movie');
       expect($scope.movies[0]._id).toBe('2');
-      expect($scope.newMovie).toBe(null);
+      expect($scope.movies[0].name).toBe('test movie');
+      expect($scope.errors.length).toBe(0);
     });
 
     it('should delete a movie', function() {
