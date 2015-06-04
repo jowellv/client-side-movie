@@ -14,35 +14,21 @@
       </ul>
       <button data-ng-click="clearErrors()"> Clear Errors </button>
     </aside>
-    <form name="newMovieForm" data-ng-submit="createNewMovie()">
-      <input type="text" required data-ng-model="newMovie.name">
-      <select data-ng-model="newMovie.genre">
-        <option value="action">action</option>
-        <option value="adventure">adventure</option>
-        <option value="comedy">comedy</option>
-        <option value="drama">drama</option>
-        <option value="horror">horror</option>
-        <option value="war">war</option>
-      </select>
-      <button type="submit" data-ng-disabled="newMovieForm.$invalid">Create New Movie</button>
-    </form>
+    <div data-movie-form-directive
+      data-save ="createNewMovie(movie)"
+    data-button-text="'Create New Movie'"
+    data-label-text="Create A New Movie"> </div>
     <ul data-ng-repeat="movie in movies">
       <li>{{movie.name}} - {{movie.genre}}
-        <button data-ng-click="removeMovie(movie)">Delete</button>
-        <button data-ng-if="!movie.editing" data-ng-click="movie.editing = true;movie.oldName=movie.name;movie.oldGenre=movie.genre;">Edit</button>
-        <form name="{{'editing' + movie._id}}" data-ng-if="movie.editing" data-ng-submit="saveMovie(movie)">
-          <input type="text" data-ng-model="movie.name">
-          <select data-ng-model="movie.genre">
-            <option value="action">action</option>
-            <option value="adventure">adventure</option>
-            <option value="comedy">comedy</option>
-            <option value="drama">drama</option>
-            <option value="horror">horror</option>
-            <option value="war">war</option>
-          </select>
-          <button type="submit">Save Changes</button>
-          <button data-ng-click="movie.editing=false;movie.name=movie.oldName;movie.genre=movie.oldGenre">Cancel</button>
-        </form>
+        <button data-ng-disabled="!movie._id" data-ng-click="removeMovie(movie)">Delete</button>
+        <button data-ng-if="!movie.editing" data-ng-disabled="!movie._id" data-ng-click="toggleEdit(movie)">Edit</button>
+        <div data-movie-form-directive
+          data-save="saveMovie(movie)"
+          data-button-text="'Save Changes'"
+          data-label-text="Editing Movie"
+          data-ng-if="movie.editing"
+          data-movie="movie">
+          <button type="button" data-ng-click="toggleEdit(movie)">Cancel</button>
       </li>
     </ul>
   </main>
