@@ -5,33 +5,8 @@
   <title>Client Side</title>
 </head>
 <body data-ng-app="moviesApp">
-  <main data-ng-controller="moviesController" data-ng-init="getAll()">
-    <h1>This the MovieDB</h1>
-    <aside data-ng-if="errors.length">
-      <h2>Errors:</h2>
-      <ul data-ng-repeat="error in errors">
-        <li>{{error.msg}}</li>
-      </ul>
-      <button data-ng-click="clearErrors()"> Clear Errors </button>
-    </aside>
-    <div data-movie-form-directive
-      data-save ="createNewMovie(movie)"
-    data-button-text="'Create New Movie'"
-    data-label-text="Create A New Movie"> </div>
-    <ul data-ng-repeat="movie in movies">
-      <li>{{movie.name}} - {{movie.genre}}
-        <button data-ng-disabled="!movie._id" data-ng-click="removeMovie(movie)">Delete</button>
-        <button data-ng-if="!movie.editing" data-ng-disabled="!movie._id" data-ng-click="toggleEdit(movie)">Edit</button>
-        <div data-movie-form-directive
-          data-save="saveMovie(movie)"
-          data-button-text="'Save Changes'"
-          data-label-text="Editing Movie"
-          data-ng-if="movie.editing"
-          data-movie="movie">
-          <button type="button" data-ng-click="toggleEdit(movie)">Cancel</button>
-      </li>
-    </ul>
-  </main>
+  <div data-logout-directive></div>
+  <main data-ng-view></main>
   <script src="bundle.js"></script>
 </body>
 </html>
