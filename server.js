@@ -2,17 +2,27 @@
 
 var mongoose = require('mongoose');
 var express = require('express');
+var passport = require('passport');
 var app = express();
 
+app.use(express.static(__dirname + '/build'));
+
+process.env.APP_SECRET = process.env.APP_SECRET || 'changethischangethischangethis';
+
 var moviesRoutes = express.Router();
+var usersRoutes = express.Router();
 
-mongoose.connect(process.env.MONGOLAB_URI ||'mongodb://localhost/dev_db');
+mongoose.connect(process.env.MONGOLAB_URI ||'mongodb://localhost/movies_dev');
 
-app.use(express.static(__dirname + '/build')); //all the files in /build will static server
+app.use(passport.initialize());
+
+require('./lib/passport_strat')(passport);
 
 require('./routes/movies_routes')(moviesRoutes);
+require('./routes/auth_routes')(usersRoutes, passport);
 
 app.use('/api', moviesRoutes);
+app.use('/api', usersRoutes);
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('server up on port ' + (process.env.PORT || 3000));
